@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Final Project</title>
+    <!--Note this is bootstrap 5-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!--Link to Style Sheet-->
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+
+<body>
+    <div id= "title-container" class="container-fluid main_background">
+        <div class="row">
+            <div class="col-sm-12 pt-5 d-flex justify-content-center align-items-center">
+                <h2>PROJECT TITLE</h2>
+            </div>
+        </div>
+    </div>
+    <div id= "question-container" class="container-fluid main_background">
+        <div class="row" id='machine-learning-row'>
+            <div id="form-col" class="col-sm-6 d-flex justify-content-center">
+                <form class='row flex-row justify-content-center' method="post">
+                    <div class="col-3 form-group">
+                        <label for="exampleDataList" class="form-label">Household Size</label>
+                        <input class="form-control" list="datalistOptions" id="exampleDataList" name='dropdown'>
+                            <datalist id="datalistOptions">
+                                <option value="1">
+                                <option value="2">
+                                <option value="3">
+                                <option value="4">
+                                <option value="5">
+                            </datalist>
+                        </input>
+                    </div>
+                    <div class="col-3 form-group">
+                        <label for="exampleDataList2" class="form-label">Days Skied</label>
+                        <input class="form-control" list="datalistOptions2" id="exampleDataList2" name='dropdown2'>
+                            <datalist id="datalistOptions2">
+                                <option value="8">
+                                <option value="9">
+                            </datalist>
+                        </input>
+                    </div>
+                    <div class="col-4 form-group">
+                        <label for="exampleDataList3" class="form-label">Ski Resort</label>
+                        <input class="form-control" list="datalistOptions3" id="exampleDataList3" name='dropdown3'>
+                            <datalist id="datalistOptions3">
+                                <option value="Keystone">
+                                <option value="Vail">
+                                <option value="Winter Park">
+                            </datalist>
+                        </input>
+                    </div>
+                    <div class="col-sm-12 d-flex justify-content-end align-items-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form> 
+            </div>
+            <div class='col-sm-4 d-flex align-items-center justify-content-start'>
+                <div class='row'>
+                    <div class = 'col-sm-12 d-flex justify-content-start align-items-center' id='machine-learning-label'>
+                        <h5>Your Satisfaction Score</h5>
+                    </div>
+                    <div class = 'col-sm-10 d-flex border border-dark justify-content-center align-items-center' id='machine-learning-output'>
+                        {{outcome}}
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div id= "chart-container" class="container-fluid main_background">
+        <div class="row" >
+            <div class="chart-div col-sm-6 d-flex border border-dark justify-content-center align-items-center">
+                <div id="chart1">
+                <!-- chart 1 here -->
+                </div>
+            </div>
+            <div id="chart2-div" class="chart-div col-sm-6 d-flex justify-content-center align-items-center">
+                <div id="chart2">
+                    <!-- chart 2 here -->
+                    <p>Chart 2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id = "map-container" class="container-fluid main_background">
+        <div id = "map-row" class="row">
+            <div id = "map-col" class="col-sm-12">
+                <!-- map here-->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer-->
+    <div id="footer" class="main_background">
+        <p class="footer-text">GroupName&copy;2021</p>
+    </div>
+
+<!-- Libraries-->
+
+    <!-- Jquery & Bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+
+    <!--Mapping-->
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.20/topojson.min.js"></script>
+  
+    <!-- Visuals (D3, Plotly, ChartsJS)-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Link to JS file-->
+    <script type="text/javascript" src="../static/js/app.js"></script>
+
+</body>
+
+</html>
