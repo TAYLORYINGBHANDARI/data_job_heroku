@@ -12,11 +12,14 @@ from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
 import psycopg2
 
+import pickle
+from pickle import dump as dump, load as load
+import numpy as np
+
 #os allows you to call in environment variables
 # we will set the remote environment variables in heroku 
 from dotenv import load_dotenv
 import os 
-
 load_dotenv()
 
 
@@ -27,11 +30,11 @@ load_dotenv()
 #make sure you have your own .env on your computer
 #comment out when you plan to deploy from heroku
 
-#url = os.getenv('URL')
+url = os.getenv('URL')
 
 
 #uncomment line below when you want to deploy to heroku
-url = os.environ.get("URL")
+# url = os.environ.get("URL")
 
 
 engine = create_engine(f'{url}')
@@ -52,89 +55,133 @@ app = Flask(__name__)
 
 #Line below will load your machine learning model
 #model = joblib.load("<filepath to saved model>")
+#load the scaler
+loaded_scaler=pickle.load("ml_picklefiles/Xscaler.pkl","rb")
+
+#model
+def ML_Predictor(to_predict_list):
+    to_predict = np.array(to_predict_list).reshape#(1,?)
+    #load the model
+    loaded_model = pickle.load(open("finalized_model_oct_23_9_03.sav","rb"))
+    #get model to predict
+    result = loaded_model.predict(to_predict)
+    
+    return result[0]
+
+
+app.route('/', methods = ['GET','POST'])
+
+def result():
+    if request.method == 'POST':
+        to_predict_list = request.form.get("dropdown")
+        to_predict_list = request.form.get("dropdown2")
+        to_predict_list= request.form.get("dropdown3")
+        to_predict_list= request.form.get("dropdown4")
+        
+        to_predict_list = list(to_predict_list.values())
+        to_predict_list = list(map(int, to_predict_list))
+        scaled_user_input=to_predict_list
+        prediction = ML_Predictor(scaled_user_input)       
+        if int(prediction)== 1:
+            prediction ='yes,easy to apply'
+        else:
+            prediction ='not easy,but still can try'           
+        return render_template("index.html", prediction = prediction)
+
+
+
+
+
+
 
 
 
 # create route that renders index.html template
-@app.route("/", methods=["GET","POST"])
-def home():
-    
-    #If you have the user submit a form
-    if request.method == 'POST': 
-        
-        #get the contents of the input field. This is referenced by the name argument
-        #in the input html
-        input_1 = request.form.get("dropdown")
-        input_2 = request.form.get("dropdown2")
-        
-        #all forms return a string, if you want your input to convert to numeric check
-        #that the input is numeric and then convert. Skip if you need string inputs for your model
-        if input_1.isnumeric():
-            
-            #convert to integer
-            variable_1 = int(input_1)
-            variable_2 = int(input_2)
+# @app.route("/", methods=["GET","POST"])
 
-            #plug your inputs into the model you loaded. In this case my model just
-            #adds the variables and multiplies. Your model is your machine learning model.
-            outcome = (variable_1+variable_2)*2 #model(input_1,input_2)
-        
-        #This ensures that if a non numeric input is passed, nothing happens
-        else:
-            outcome = 'What Will Your Value Be?' 
-        
-        return render_template("index.html", outcome=outcome)
+# def home():
     
-    #if you are not recieving form data from a user, for instance when the pager first loads
-    #this is what happens. 
-    else:
-        outcome = 'What Will Your Value Be?' 
+#     #If you have the user submit a form
+#     if request.method == 'POST': 
+        
+#         #get the contents of the input field. This is referenced by the name argument
+#         #in the input html
+#         input_1 = request.form.get("dropdown")
+#         input_2 = request.form.get("dropdown2")
+#         input_3 = request.form.get("dropdown3")
+#         input_4 = request.form.get("dropdown4")
+        
+        
+#         #all forms return a string, if you want your input to convert to numeric check
+#         #that the input is numeric and then convert. Skip if you need string inputs for your model
+#         if input_1.isnumeric():
+            
+#             #convert to integer
+#             variable_1 = int(input_1)
+#             variable_2 = int(input_2)
+#             variable_1 = int(input_3)
+#             variable_2 = int(input_4)
+
+#             #plug your inputs into the model you loaded. In this case my model just
+#             #adds the variables and multiplies. Your model is your machine learning model.
+#             # result =load_model.predict(input_1,input_2)
+        
+#         #This ensures that if a non numeric input is passed, nothing happens
+#         else:
+#             outcome = 'What Will Your Value Be?' 
+        
+#         return render_template("index.html", outcome=outcome)
+    
+#     #if you are not recieving form data from a user, for instance when the pager first loads
+#     #this is what happens. 
+#     else:
+#         outcome = 'What Will Your Value Be?' 
          
-        return render_template("index.html", outcome=outcome)
+#         return render_template("index.html", outcome=outcome)
 
 
 #make an endpoint for data you are using in charts. You will use JS to call this data in
 #using d3.json("/api/data")
-@app.route("/api/data")
-def data():
+# @app.route("/api/data")
+# def data():
     
     
-    # Create our session (link) from Python to the DB
-    session = Session(engine)
+#     # Create our session (link) from Python to the DB
+#     session = Session(engine)
     
-    #Query Database. Check SqlAlchemy documentation for how to query
-    EData = session.query(EnvironmentData).all()
-    myData = []
+#     #Query Database. Check SqlAlchemy documentation for how to query
+#     EData = session.query(EnvironmentData).all()
+#     myData = []
 
     
-    #here I decided I want a list of dictionaries, where each dictionary represents a row of data
-    #from my sql database. This format makes filter and map functions in js easy. 
-    for x in EData:
+#     #here I decided I want a list of dictionaries, where each dictionary represents a row of data
+#     #from my sql database. This format makes filter and map functions in js easy. 
+#     for x in EData:
 
-        fullEdata = {}
+#         fullEdata = {}
 
-        fullEdata = {
-            "Country": x.Country,
-            "HDI":x.HDI,
-            "Footprint_Crop":x.Footprint_Crop,
-            "Footprint_Graze":x.Footprint_Graze,
-            "Footprint_Forest":x.Footprint_Forest,
-            "Footprint_Carbon":x.Footprint_Carbon,
-            "Footprint_Fish":x.Footprint_Fish,
-            "Footprint_Total":x.Footprint_Total,
-            "Land_Urban":x.Land_Urban,
-            "Emission_CO2":x.Emissions_CO2,
-            "BioCap":x.Biocapacity_Total,
-            "BioCap_RD":x.BioCap_RD,
-            "Data_Quality":x.Data_Quality
-        }
+#         fullEdata = {
+#             "Country": x.Country,
+#             "HDI":x.HDI,
+#             "Footprint_Crop":x.Footprint_Crop,
+#             "Footprint_Graze":x.Footprint_Graze,
+#             "Footprint_Forest":x.Footprint_Forest,
+#             "Footprint_Carbon":x.Footprint_Carbon,
+#             "Footprint_Fish":x.Footprint_Fish,
+#             "Footprint_Total":x.Footprint_Total,
+#             "Land_Urban":x.Land_Urban,
+#             "Emission_CO2":x.Emissions_CO2,
+#             "BioCap":x.Biocapacity_Total,
+#             "BioCap_RD":x.BioCap_RD,
+#             "Data_Quality":x.Data_Quality
+#         }
 
-        myData.append(fullEdata)
+#         myData.append(fullEdata)
         
-    session.close()
+#     session.close()
     
-    #Return the JSON representation of your dictionary
-    return (jsonify(myData))
+#     #Return the JSON representation of your dictionary
+#     return (jsonify(myData))
 
 if __name__ == '__main__':
     app.run(debug=True)
