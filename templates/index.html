@@ -17,7 +17,7 @@
     <div id= "title-container" class="container-fluid main_background">
         <div class="row">
             <div class="col-sm-12 pt-5 d-flex justify-content-center align-items-center">
-                <h2>PROJECT TITLE</h2>
+                <h2>Data Analyst Jobs Analysis</h2>
             </div>
         </div>
     </div>
@@ -26,36 +26,92 @@
             <div id="form-col" class="col-sm-6 d-flex justify-content-center">
                 <form class='row flex-row justify-content-center' method="post">
                     <div class="col-3 form-group">
-                        <label for="exampleDataList" class="form-label">Household Size</label>
+                        <label for="exampleDataList" class="form-label">Company Size</label>
                         <input class="form-control" list="datalistOptions" id="exampleDataList" name='dropdown'>
                             <datalist id="datalistOptions">
-                                <option value="1">
-                                <option value="2">
-                                <option value="3">
-                                <option value="4">
-                                <option value="5">
+                                <option value="Size__1-200 employees">
+                                <option value="Size__200+ employees">
+                                <option value="Size__500+ employees">
+                                <option value="Size__1000+ employees">
+                                <option value="Size__10000+ employees">
                             </datalist>
                         </input>
                     </div>
                     <div class="col-3 form-group">
-                        <label for="exampleDataList2" class="form-label">Days Skied</label>
+                        <label for="exampleDataList2" class="form-label">Type of Ownership</label>
                         <input class="form-control" list="datalistOptions2" id="exampleDataList2" name='dropdown2'>
                             <datalist id="datalistOptions2">
-                                <option value="8">
-                                <option value="9">
+                                <option value="Type_of_ownership_College / University">
+                                <option value="Type_of_ownership_Company - Private">
+                                <option value="Type_of_ownership_Company - Public">
+                                <option value="Type_of_ownership_Contract">
+                                <option value="Type_of_ownership_Franchise">
+                                <option value="Type_of_ownership_Government">
+                                <option value="Type_of_ownership_Hospital">
+                                <option value="Type_of_ownership_Nonprofit Organization">
+
+                                <option value="Type_of_ownership_Other Organization">
+                                <option value="Type_of_ownership_Private Practice / Firm">
+                                <option value="Type_of_ownership_School / School District">
+                                <option value="Type_of_ownership_Self-employed">
+                                <option value="Type_of_ownership_Subsidiary or Business Segment">
+                                <option value="Type_of_ownership_Unknown', 'Sector__Accounting & Legal">
+
                             </datalist>
                         </input>
                     </div>
+
+                    <div class="col-3 form-group">
+                        <label for="exampleDataList2" class="form-label">Sector</label>
+                        <input class="form-control" list="datalistOptions2" id="exampleDataList2" name='dropdown3'>
+                            <datalist id="datalistOptions2">
+                                <option value="Sector__Aerospace & Defense">
+                                <option value="Sector__Arts, Entertainment & Recreation">
+                                <option value="Sector__Biotech & Pharmaceuticals', 'Sector__Business Services">
+                                <option value="Sector__Construction, Repair & Maintenance">
+                                <option value="Sector__Consumer Services', 'Sector__Education', 'Sector__Finance">
+                                <option value="Sector__Government', 'Sector__Health Care">
+                                <option value="Sector__Information Technology', 'Sector__Insurance">
+                                <option value="Sector__Manufacturing', 'Sector__Media', 'Sector__Mining & Metals">
+                                <option value="Sector__Non-Profit', 'Sector__Oil, Gas, Energy & Utilities">
+                                <option value="Sector__Real Estate', 'Sector__Restaurants, Bars & Food Services">
+                                <option value="Sector__Retail', 'Sector__Telecommunications">
+                                <option value="Sector__Transportation & Logistics', 'Revenue__$1+ billion">
+
+                     
+                            </datalist>
+                        </input>
+                    </div>
+
+                    <div class="col-3 form-group">
+                        <label for="exampleDataList2" class="form-label">Revenue</label>
+                        <input class="form-control" list="datalistOptions2" id="exampleDataList2" name='dropdown4'>
+                            <datalist id="datalistOptions2">
+                                <option value="Revenue__Less than $1 million">
+                                <option value="Revenue__$1+ million">
+                                <option value="Revenue__$50 million">
+                                <option value="Revenue__$100+ million">
+                               
+                            </datalist>
+                        </input>
+                    </div>
+
                     <div class="col-4 form-group">
-                        <label for="exampleDataList3" class="form-label">Ski Resort</label>
-                        <input class="form-control" list="datalistOptions3" id="exampleDataList3" name='dropdown3'>
+                        <label for="exampleDataList3" class="form-label">Rating</label>
+                        <input class="form-control" list="datalistOptions3" id="exampleDataList3" name='dropdown5'>
                             <datalist id="datalistOptions3">
-                                <option value="Keystone">
-                                <option value="Vail">
-                                <option value="Winter Park">
+                                <option value="Rating_new_1.0">
+                                <option value="Rating_new_2.0">
+                                <option value="Rating_new_2.5">
+                                <option value="Rating_new_3.0">
+                                <option value="Rating_new_3.5">
+                                <option value="Rating_new_4.0">
+                                <option value="Rating_new_4.5">
+                                <option value="Rating_new_5.0">
                             </datalist>
                         </input>
                     </div>
+
                     <div class="col-sm-12 d-flex justify-content-end align-items-center">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
@@ -64,7 +120,7 @@
             <div class='col-sm-4 d-flex align-items-center justify-content-start'>
                 <div class='row'>
                     <div class = 'col-sm-12 d-flex justify-content-start align-items-center' id='machine-learning-label'>
-                        <h5>Your Satisfaction Score</h5>
+                        <h5>The output</h5>
                     </div>
                     <div class = 'col-sm-10 d-flex border border-dark justify-content-center align-items-center' id='machine-learning-output'>
                         {{outcome}}

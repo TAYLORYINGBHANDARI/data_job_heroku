@@ -2,8 +2,7 @@
 import joblib  #for importing your machine learning model
 from flask import Flask, render_template, request, jsonify, make_response
 import pandas as pd 
-
-
+import sklearn
 
 # SQLALCHEMY SETUP
 import sqlalchemy
@@ -18,9 +17,10 @@ import numpy as np
 
 #os allows you to call in environment variables
 # we will set the remote environment variables in heroku 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os 
-load_dotenv()
+
+# load_dotenv()
 
 
 #################################################
@@ -54,91 +54,84 @@ app = Flask(__name__)
 
 
 #Line below will load your machine learning model
-#model = joblib.load("<filepath to saved model>")
 #load the scaler
-loaded_scaler=pickle.load("ml_picklefiles/Xscaler.pkl","rb")
+loaded_scaler=pickle.load("ml_picklefiles/Xscaler_new.pkl","rb")
+#load the model 
+model = joblib.load("ml_picklefiles/finalized_model_nov9.sav","rb")
 
-#model
-def ML_Predictor(to_predict_list):
-    to_predict = np.array(to_predict_list).reshape#(1,?)
-    #load the model
-    loaded_model = pickle.load(open("finalized_model_oct_23_9_03.sav","rb"))
-    #get model to predict
-    result = loaded_model.predict(to_predict)
-    
-    return result[0]
 
 
 app.route('/', methods = ['GET','POST'])
 
 def result():
+    
+    column_names=[ 'Size__1-200 employees', 'Size__1000+ employees',
+       'Size__10000+ employees', 'Size__200+ employees',
+       'Size__500+ employees', 'Type_of_ownership_College / University',
+       'Type_of_ownership_Company - Private',
+       'Type_of_ownership_Company - Public', 'Type_of_ownership_Contract',
+       'Type_of_ownership_Franchise', 'Type_of_ownership_Government',
+       'Type_of_ownership_Hospital',
+       'Type_of_ownership_Nonprofit Organization',
+       'Type_of_ownership_Other Organization',
+       'Type_of_ownership_Private Practice / Firm',
+       'Type_of_ownership_School / School District',
+       'Type_of_ownership_Self-employed',
+       'Type_of_ownership_Subsidiary or Business Segment',
+       'Type_of_ownership_Unknown', 'Sector__Accounting & Legal',
+       'Sector__Aerospace & Defense',
+       'Sector__Arts, Entertainment & Recreation',
+       'Sector__Biotech & Pharmaceuticals', 'Sector__Business Services',
+       'Sector__Construction, Repair & Maintenance',
+       'Sector__Consumer Services', 'Sector__Education', 'Sector__Finance',
+       'Sector__Government', 'Sector__Health Care',
+       'Sector__Information Technology', 'Sector__Insurance',
+       'Sector__Manufacturing', 'Sector__Media', 'Sector__Mining & Metals',
+       'Sector__Non-Profit', 'Sector__Oil, Gas, Energy & Utilities',
+       'Sector__Real Estate', 'Sector__Restaurants, Bars & Food Services',
+       'Sector__Retail', 'Sector__Telecommunications',
+       'Sector__Transportation & Logistics', 'Revenue__$1+ billion',
+       'Revenue__$1+ million', 'Revenue__$100+ million',
+       'Revenue__$50 million', 'Revenue__Less than $1 million',
+       'Rating_new_1.0', 'Rating_new_2.0', 'Rating_new_2.5', 'Rating_new_3.0',
+       'Rating_new_3.5', 'Rating_new_4.0', 'Rating_new_4.5', 'Rating_new_5.0']
+    
+    mylist=[0]*55
+    column_df=pd.DataFrame(columns=column_names)
+    column_df.loc[0]=mylist
+    
+    
+    
+    
     if request.method == 'POST':
-        to_predict_list = request.form.get("dropdown")
-        to_predict_list = request.form.get("dropdown2")
-        to_predict_list= request.form.get("dropdown3")
-        to_predict_list= request.form.get("dropdown4")
+        print(request.form)
+        #get the contents of the input field.
+        size= request.form.get("dropdown")
+        column_df[size]=1
         
-        to_predict_list = list(to_predict_list.values())
-        to_predict_list = list(map(int, to_predict_list))
-        scaled_user_input=to_predict_list
-        prediction = ML_Predictor(scaled_user_input)       
+        ownership = request.form.get("dropdown2")
+        column_df[ownership]=1
+        sector= request.form.get("dropdown3")
+        column_df[sector]=1
+        revenue= request.form.get("dropdown4")
+        column_df[revenue]=1
+        rating= request.form.get("dropdown5")
+        column_df[rating]=1
+        
+        # Encode user inputs
+        scaled_user_input = loaded_scaler.transform([column_df.loc[0]])
+        
+        
+        
+        prediction =model.predict(scaled_user_input)   
+        
+        print(prediction)   
+        
         if int(prediction)== 1:
             prediction ='yes,easy to apply'
         else:
             prediction ='not easy,but still can try'           
-        return render_template("index.html", prediction = prediction)
-
-
-
-
-
-
-
-
-
-# create route that renders index.html template
-# @app.route("/", methods=["GET","POST"])
-
-# def home():
-    
-#     #If you have the user submit a form
-#     if request.method == 'POST': 
-        
-#         #get the contents of the input field. This is referenced by the name argument
-#         #in the input html
-#         input_1 = request.form.get("dropdown")
-#         input_2 = request.form.get("dropdown2")
-#         input_3 = request.form.get("dropdown3")
-#         input_4 = request.form.get("dropdown4")
-        
-        
-#         #all forms return a string, if you want your input to convert to numeric check
-#         #that the input is numeric and then convert. Skip if you need string inputs for your model
-#         if input_1.isnumeric():
-            
-#             #convert to integer
-#             variable_1 = int(input_1)
-#             variable_2 = int(input_2)
-#             variable_1 = int(input_3)
-#             variable_2 = int(input_4)
-
-#             #plug your inputs into the model you loaded. In this case my model just
-#             #adds the variables and multiplies. Your model is your machine learning model.
-#             # result =load_model.predict(input_1,input_2)
-        
-#         #This ensures that if a non numeric input is passed, nothing happens
-#         else:
-#             outcome = 'What Will Your Value Be?' 
-        
-#         return render_template("index.html", outcome=outcome)
-    
-#     #if you are not recieving form data from a user, for instance when the pager first loads
-#     #this is what happens. 
-#     else:
-#         outcome = 'What Will Your Value Be?' 
-         
-#         return render_template("index.html", outcome=outcome)
-
+    return render_template("index.html", prediction = prediction)
 
 #make an endpoint for data you are using in charts. You will use JS to call this data in
 #using d3.json("/api/data")

@@ -64,6 +64,7 @@ def home():
         #get the contents of the input field. This is referenced by the name argument
         #in the input html
         input_1 = request.form.get("dropdown")
+        
         input_2 = request.form.get("dropdown2")
         
         #all forms return a string, if you want your input to convert to numeric check
@@ -137,3 +138,15 @@ def data():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
+    
+    
+    
+    ###delete part.keep as copy
+    #### # Place user inputs into a list and create df for label encoding
+        ##not  sure about this par  to_predict_list=[size,ownership,sector,revenue,rating]
+        # inputs_pd = pd.DataFrame([to_predict_list, to_predict_list])
+        
+        
+        scaled_user_input = loaded_scaler([column_df.loc[0]])
+        prediction =model(scaled_user_input)  
