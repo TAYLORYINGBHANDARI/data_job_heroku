@@ -34,7 +34,7 @@ function barchart(data){
 function getData(){
 
     //grab the data from the endpoint you created in flask
-    d3.json("/api/data").then((json) => {
+    d3.json("/").then((json) => {
 
         //pass that data into the functions to create the charts
 

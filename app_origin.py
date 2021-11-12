@@ -148,5 +148,5 @@ if __name__ == '__main__':
         # inputs_pd = pd.DataFrame([to_predict_list, to_predict_list])
         
         
-        scaled_user_input = loaded_scaler([column_df.loc[0]])
-        prediction =model(scaled_user_input)  
+        # scaled_user_input = loaded_scaler([column_df.loc[0]])
+        # prediction =model(scaled_user_input)  
