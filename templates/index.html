@@ -4,9 +4,28 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>Final Project</title>
+    <title>Data Analyst Jobs Analysis</title>
+
     <!--Note this is bootstrap 5-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   
+
+
+
+    <!--leaflet ---->
+    <!--<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />-->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+    <link rel="stylesheet" href="{{url_for('static',filename='./css/style_leaf.css')}}" type="text/css"/>
+
+
+
+
+
+
+    
     
     <!--Link to Style Sheet-->
     <link rel="stylesheet" href="../static/css/style.css">
@@ -14,6 +33,62 @@
 </head>
 
 <body>
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="/templates/index.html">HOME</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="https://docs.google.com/presentation/d/1SUl3yY8kKiKlo8MB3cTNO_I8-3BFiIz1vBOBxZ0y0hU/edit?usp=sharing">Link to project detail</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/team">Our Team</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+    
+
+    <!-- <main role="main"> -->
+    <!-- JUMBOTRON -->
+    <div id = "map-container" class="container-fluid main_background">
+        <div class="row"  >
+            <div class='hero text-center align-content-center'>
+            <h1 class="display-3">Data Analyst Job Market Analysis</h1>
+            <h2 class="lead">A tool for our colleagues</h2>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- leaflet -->
+    <!-- <div id='map'></div> -->
+
+
+
+    <div id = "map-container" class="container-fluid main_background">
+        <div id = "map-row" class="row">
+            <div id = "map-col" class="col-sm-12">
+                <div id='map'></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- machine learning model -->
     <div id= "title-container" class="container-fluid main_background">
         <div class="row">
             <div class="col-sm-12 pt-5 d-flex justify-content-center align-items-center">
@@ -130,35 +205,46 @@
             </div> 
         </div>
     </div>
-    <div id= "chart-container" class="container-fluid main_background">
+    <!-- <div id= "chart-container" class="container-fluid main_background">
         <div class="row" >
             <div class="chart-div col-sm-6 d-flex border border-dark justify-content-center align-items-center">
                 <div id="chart1">
                 <!-- chart 1 here -->
-                </div>
+                <!-- </div>
             </div>
             <div id="chart2-div" class="chart-div col-sm-6 d-flex justify-content-center align-items-center">
                 <div id="chart2">
                     <!-- chart 2 here -->
-                    <p>Chart 2</p>
+                    <!-- <p>Chart 2</p>
                 </div>
             </div>
         </div>
-    </div>
-    <div id = "map-container" class="container-fluid main_background">
+    </div> --> 
+    <!-- <div id = "map-container" class="container-fluid main_background">
         <div id = "map-row" class="row">
             <div id = "map-col" class="col-sm-12">
-                <!-- map here-->
+                <div id='map'></div>
             </div>
         </div>
-    </div>
-
+    </div> -->
+    <!-- </main> -->
     <!-- Footer-->
     <div id="footer" class="main_background">
-        <p class="footer-text">GroupName&copy;2021</p>
+        <p class="footer-text">PsychoDataSquad&copy;2021</p>
     </div>
 
 <!-- Libraries-->
+    <!--Leaflet---- <script type="text/javascript" src="../static/data/us-states.js"></script> without flask turn on and off as needed each line-->   
+
+    <script type="text/javascript" src="{{url_for('static',filename='./data/us-states.js')}}"></script>    <!--with flask-->
+
+    <script type="text/javascript" src="{{url_for('static',filename='./js/logic.js')}}"></script>
+
+
+
+
+
+
 
     <!-- Jquery & Bootstrap-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -177,6 +263,7 @@
 
     <!-- Link to JS file-->
     <script type="text/javascript" src="../static/js/app.js"></script>
+
 
 </body>
 

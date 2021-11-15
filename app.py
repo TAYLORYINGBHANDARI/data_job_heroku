@@ -21,7 +21,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-#################################################
+#################################################gi
 # Database Setup
 #################################################
 
@@ -131,6 +131,14 @@ def result():
         else:
             prediction ='not easy,but still can try'           
     return render_template("index.html", prediction = prediction)
+
+
+@app.route('/team', methods = ['GET','POST'])
+
+def team():
+    
+    return render_template("team.html")
+
 
 
 if __name__ == '__main__':

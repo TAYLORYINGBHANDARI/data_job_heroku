@@ -1,5 +1,58 @@
+.jumbotron-fluid {
+    background-image:url(../banner2.png);
+    /* background-color: black; */
+    /* color: #ffffff; */
+    font-size: 48px;  
+    font-family: 'Shift', sans-serif;
+    font-weight: bold;
+    margin-top: 12px;
+    height:100%;
+    width: 100%;
+  
+  }
+  
+h1 {
+    
+    padding-top: 50px;
+    font-family: Arial;
+    color: #ffffff;
+}
+h2.lead {
+    font-family: Arial;
+    color: #ffffff;
+    font-size:30px;
+    }
+h2 {
+    padding-top: 20px;
+    font-family: Arial;
+    color: #ffffff;
+    font-size:30px;
+
+}
+
+
+
+.hero {
+    position: relative;
+    height: 35vw;
+    background: black;
+    box-shadow: inset 0 0 0 100vw rgba(0,0,0,0.3);
+    background-image:url(../banner2.png);
+    background-attachment: fixed;
+    background-position: bottom center;
+    background-size: cover;
+  }
+
+
+
+
+
+
+
+
 .main_background{
-    background-color: whitesmoke;
+    background-color: #ff9900;
+    padding: 0%;
 }
 
 /* Machine Learning Row */
@@ -10,7 +63,7 @@
 }
 
 #machine-learning-output{
-    background-color: rgb(218, 169, 37);
+    background-color: #b82e2e;
     height: 150px;
     width: 200px;
     font-size: x-large;
@@ -41,6 +94,17 @@
 
 #map-col{
     height: 500px;
-    background-color: rgb(32, 32, 138);
+    background-color: rgb(255, 255, 255);
    
+}
+
+
+/* -----leaf let css */
+
+
+/* team.html page */
+
+.container {
+    margin-top: 100px;
+    padding-top:50px;
 }
