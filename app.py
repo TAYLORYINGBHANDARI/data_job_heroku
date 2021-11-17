@@ -127,9 +127,9 @@ def result():
         # print(prediction)   
         
         if int(prediction)== 1:
-            prediction ='yes,easy to apply'
+            prediction ='Yes! This company is EASY to apply to! '
         else:
-            prediction ='not easy,but still can try'           
+            prediction ='No! This company is NOT that easy to apply to, but you can still try!! '           
     return render_template("index.html", prediction = prediction)
 
 
