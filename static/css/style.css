@@ -68,7 +68,7 @@ p {
     height: 35vw;
     background: black;
     box-shadow: inset 0 0 0 100vw rgba(0,0,0,0.3);
-    background-image:url(../banner2.png);
+    background-image:url(https://datajobheroku.s3.amazonaws.com/banner2.png);
     background-attachment: fixed;
     background-position: bottom center;
     background-size: cover;
