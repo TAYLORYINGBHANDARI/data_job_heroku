@@ -14,14 +14,14 @@
 .navbar-brand {
     font-family: 'Lato', sans-serif;
     font-style: bold;
-    font-size: 30px;
+    font-size: 1.5vw;
+    font-weight: 700;
 
 }
 .nav-link {
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    font-size: 25px;
-    font-style:regular;
+    font-size: 1.3vw;
 
 }
 
@@ -42,7 +42,7 @@
 
 /* header title */
 .display-3{
-    font-size:80px;
+    font-size:4vw;
     
     padding-top: 200px;
     font-family: 'Lato',sans-serif;
@@ -56,7 +56,7 @@
 h2.lead {
     font-family: 'Lato',sans-serif;
     color: #ffffff;
-    font-size:45px;
+    font-size:2vw;
     font-weight:300;
     font-style: italic;
     }
@@ -67,17 +67,17 @@ h2.lead {
 
 /* machine learning title  */
 
-h3{ 
-    padding-top: 120px;
+/* h3{ position: center;
+    padding-top: 1vw;
     font-family: 'Lato',sans-serif;
     color: #ffffff;
-    font-size:65px;
+    font-size:2.5vw;
     font-weight:400;
     font-style: italic;
 
-}
-h1 {
-    font-size:85px;
+} */
+h1 {position: center;
+    font-size:3.5vw;
     font-family: 'Lato',sans-serif;
     color: #ffffff;
     font-weight: 700;
@@ -87,11 +87,11 @@ h1 {
 
 
 /* machinelearning subtitle */
-h2 {
-    padding-top: 18px;
+h2 {position: center;
+    padding-top: 0vw;
     font-family: 'Lato',sans-serif;
     color: #ffffff;
-    font-size:40px;
+    font-size:1.5vw;
     text-align: center;
     font-style: italic;
     font-weight: 400;
@@ -99,7 +99,7 @@ h2 {
 }
 
 h5 {
-    font-size:40px;
+    font-size:3vw;
     text-align: center;
     padding-top: 50px;
     font-family: 'Lato',sans-serif;
@@ -107,17 +107,11 @@ h5 {
     text-align: center;
     font-style: italic;
     font-weight: 400;
+    text-align: center;
 
 
 
 }
-
-
-
-
-
-
-
 
 
 
@@ -138,16 +132,19 @@ h5 {
 #machine-learning-output{
     background-color: #B82E2E;
 
-    height: 300px;
-    width: 500px;
+    height: 30vw;
+    width: 50vw;
     font-size: x-large;
     text-align: center;
-    margin-left: 300px;
-    align-items: center
+    margin-left: auto;
+    align-items: center;
 }
 
+
 #machine-learning-label{
-    margin-left: 300px;
+    margin-left: auto;
+    text-align: center;
+    align-items: center
 }
 
 /* .chart-div{
@@ -184,3 +181,6 @@ h5 {
     margin-top: 100px;
     padding-top:50px;
 }
+
+
+
